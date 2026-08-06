@@ -35,7 +35,7 @@
 }
 
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:88px}
 body{
   margin:0;
   background:var(--bg);
@@ -104,7 +104,17 @@ strong{font-weight:600;color:var(--body)}
 /* ---------------------------------------------------------------
    Header
    --------------------------------------------------------------- */
-.masthead{padding:20px 0 0}
+.masthead{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:var(--bg);
+  padding:18px 0 16px;
+  border-bottom:1px solid transparent;
+  transition:border-color .25s ease;
+}
+.masthead.is-stuck{border-bottom-color:var(--faint)}
+#top-sentinel{position:absolute;top:0;left:0;width:1px;height:1px}
 .masthead .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px}
 
 .wordmark{
@@ -134,7 +144,7 @@ strong{font-weight:600;color:var(--body)}
 /* ---------------------------------------------------------------
    Hero
    --------------------------------------------------------------- */
-.hero{padding:56px 0 80px}
+.hero{padding:42px 0 80px}
 .hero .wrap{
   display:grid;
   grid-template-columns:1fr clamp(300px,30vw,398px);
@@ -440,8 +450,10 @@ a.person:hover .person__name{color:var(--blue)}
 
 @media (max-width:720px){
   :root{--gutter:28px}
+  html{scroll-padding-top:104px}
   .section{padding:84px 0}
   .display{font-size:31px}
+  .masthead{padding:14px 0 12px}
   .masthead .wrap{flex-direction:column;align-items:flex-start;gap:16px}
 
   .hero .wrap{grid-template-columns:1fr}
@@ -474,12 +486,14 @@ a.person:hover .person__name{color:var(--blue)}
 }
 
 @media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
   *{transition:none!important;animation:none!important}
 }
 </style>
 </head>
 
 <body>
+<div id="top-sentinel" aria-hidden="true"></div>
 
 <!-- =========================== HEADER =========================== -->
 <header class="masthead">
@@ -806,6 +820,19 @@ a.person:hover .person__name{color:var(--blue)}
     </div>
   </div>
 </footer>
+
+<script>
+  /* Hairline under the header only once it's stuck. Purely cosmetic —
+     the header works fine if this never runs. */
+  (function () {
+    var sentinel = document.getElementById('top-sentinel');
+    var masthead = document.querySelector('.masthead');
+    if (!sentinel || !masthead || !window.IntersectionObserver) return;
+    new IntersectionObserver(function (entries) {
+      masthead.classList.toggle('is-stuck', !entries[0].isIntersecting);
+    }).observe(sentinel);
+  })();
+</script>
 
 </body>
 </html>
