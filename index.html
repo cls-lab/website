@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="cls-lab-mark.svg">
 <title>CLS Lab — Culture, Language, &amp; Systems | University of Colorado Boulder</title>
 <meta name="description" content="The Culture, Language, &amp; Systems Lab at CU Boulder studies the language systems that transmit and shape modern culture, from internet platforms to literary archives to language models.">
 
@@ -120,17 +121,20 @@ strong{font-weight:600;color:var(--body)}
 .wordmark{
   display:inline-flex;
   align-items:center;
-  gap:11px;
+  gap:10px;
   text-decoration:none;
   color:var(--ink);
 }
-.wordmark__mark{width:28px;height:28px;flex:none;display:block}
+.wordmark__mark{width:32px;height:32px;flex:none;display:block}
 .wordmark__text{
   font-family:var(--serif);
   font-weight:640;
   font-size:20px;
+  line-height:1.3;
   letter-spacing:-.012em;
   font-variation-settings:"opsz" 26,"SOFT" 0,"WONK" 0;
+  padding-left:10px;
+  border-left:1px solid var(--faint);
 }
 
 .nav{display:flex;align-items:center;gap:30px;flex-wrap:wrap}
@@ -460,8 +464,8 @@ a.person:hover .person__name{color:var(--blue)}
   .section{padding:84px 0}
   .display{font-size:31px}
   .masthead{padding:14px 0 12px}
-  .wordmark__mark{width:25px;height:25px}
-  .wordmark__text{font-size:19px}
+  .wordmark__mark{width:28px;height:28px}
+  .wordmark__text{font-size:19px;padding-left:9px}
   .masthead .wrap{flex-direction:column;align-items:flex-start;gap:16px}
 
   .hero .wrap{grid-template-columns:1fr}
@@ -507,14 +511,23 @@ a.person:hover .person__name{color:var(--blue)}
 <header class="masthead">
   <div class="wrap">
     <a class="wordmark" href="#top">
-      <svg class="wordmark__mark" viewBox="1.8 5.8 36.4 36.4" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" focusable="false">
-        <g transform="translate(0,4)">
-          <path d="M 5.4508 28.4 A 16.8 16.8 0 0 1 28.4 5.4508" stroke="#5567b8" stroke-width="2.8" stroke-linecap="round" fill="none" opacity=".95"/>
-          <path d="M 20 8.576 A 11.424 11.424 0 0 1 20 31.424" stroke="#7caeba" stroke-width="2.6" stroke-linecap="round" fill="none" opacity=".95"/>
-          <circle cx="20" cy="20" r="3.4" fill="#0a0a0a" opacity=".9"/>
-          <circle cx="5.4508" cy="28.4" r="1.4" fill="#5567b8"/>
-          <circle cx="20" cy="8.576" r="1.12" fill="#7caeba"/>
-        </g>
+      <svg class="wordmark__mark" viewBox="-0.25 -0.25 44.5 44.5" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <circle cx="3.30" cy="3.30" r="3.55" fill="#5567b8"/>
+        <circle cx="15.77" cy="3.30" r="2.29" fill="#0a0a0a" opacity=".18"/>
+        <circle cx="28.23" cy="3.30" r="2.29" fill="#0a0a0a" opacity=".18"/>
+        <circle cx="40.70" cy="3.30" r="3.55" fill="#0a0a0a"/>
+        <circle cx="3.30" cy="15.77" r="2.29" fill="#0a0a0a" opacity=".18"/>
+        <circle cx="15.77" cy="15.77" r="2.29" fill="#0a0a0a" opacity=".18"/>
+        <circle cx="28.23" cy="15.77" r="3.55" fill="#7caeba"/>
+        <circle cx="40.70" cy="15.77" r="2.29" fill="#0a0a0a" opacity=".18"/>
+        <circle cx="3.30" cy="28.23" r="2.29" fill="#0a0a0a" opacity=".18"/>
+        <circle cx="15.77" cy="28.23" r="3.55" fill="#5567b8"/>
+        <circle cx="28.23" cy="28.23" r="2.29" fill="#0a0a0a" opacity=".18"/>
+        <circle cx="40.70" cy="28.23" r="2.29" fill="#0a0a0a" opacity=".18"/>
+        <circle cx="3.30" cy="40.70" r="3.55" fill="#0a0a0a"/>
+        <circle cx="15.77" cy="40.70" r="2.29" fill="#0a0a0a" opacity=".18"/>
+        <circle cx="28.23" cy="40.70" r="2.29" fill="#0a0a0a" opacity=".18"/>
+        <circle cx="40.70" cy="40.70" r="3.55" fill="#7caeba"/>
       </svg>
       <span class="wordmark__text">CLS Lab</span>
     </a>
