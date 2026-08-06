@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLS Lab — Culture, Language, &amp; Systems | University of Colorado Boulder</title>
+<meta name="description" content="The Culture, Language, &amp; Systems Lab at CU Boulder studies the language systems that transmit and shape modern culture, from internet platforms to literary archives to language models.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@400..600&display=swap" rel="stylesheet">
+
+<style>
+/* ---------------------------------------------------------------
+   Tokens — sampled directly from the Figma design
+   --------------------------------------------------------------- */
+:root{
+  --ink:      #0a0a0a;   /* headings, wordmark            */
+  --body:     #4a4a58;   /* body copy                     */
+  --muted:    #8a8a96;   /* secondary copy, nav, authors  */
+  --faint:    #dddde8;   /* row numbers, hairlines, "+"   */
+  --blue:     #5567b8;   /* accent: lede, ampersand, PI link */
+  --teal:     #7caeba;   /* eyebrows, venues, role labels */
+  --lav:      #ebf0fa;   /* People section background     */
+  --lav-card: #edf1fa;   /* People card background        */
+  --lav-rule: #d4dcf5;   /* People card dividers          */
+  --bg:       #ffffff;
+
+  --serif: "Fraunces", Georgia, serif;
+  --sans:  "Work Sans", system-ui, -apple-system, sans-serif;
+  --mono:  "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --wrap: 1120px;
+  --gutter: 48px;   /* side whitespace; raise for more, lower for less */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--body);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+img{display:block;max-width:100%}
+
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+
+/* Focus visibility (keyboard users) */
+a:focus-visible,summary:focus-visible{
+  outline:2px solid var(--blue);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+/* ---------- shared type roles ---------- */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin:0 0 14px;
+}
+.eyebrow--grey{color:var(--muted)}
+
+.display{
+  font-family:var(--serif);
+  font-weight:640;
+  color:var(--ink);
+  font-size:38px;
+  line-height:1.16;
+  letter-spacing:-.01em;
+  font-variation-settings:"opsz" 72,"SOFT" 0,"WONK" 1;
+  margin:0;
+}
+
+.rownum{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.08em;
+  color:var(--faint);
+  padding-top:6px;
+}
+
+.rowtitle{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:21px;
+  font-variation-settings:"opsz" 28,"SOFT" 0,"WONK" 0;
+  line-height:1.32;
+  color:var(--ink);
+  margin:0;
+  padding-right:32px;
+}
+
+.rowbody{margin:0;line-height:1.63}
+strong{font-weight:600;color:var(--body)}
+
+/* ---------------------------------------------------------------
+   Header
+   --------------------------------------------------------------- */
+.masthead{padding:20px 0 0}
+.masthead .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px}
+
+.wordmark{
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:19px;
+  color:var(--ink);
+  text-decoration:none;
+  letter-spacing:.01em;
+  font-variation-settings:"opsz" 24,"SOFT" 0,"WONK" 0;
+}
+
+.nav{display:flex;align-items:center;gap:30px;flex-wrap:wrap}
+.nav a{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-decoration:none;
+  transition:color .18s ease;
+}
+.nav a:hover{color:var(--ink)}
+.nav a.is-accent{color:var(--blue)}
+.nav a.is-accent:hover{color:var(--ink)}
+
+/* ---------------------------------------------------------------
+   Hero
+   --------------------------------------------------------------- */
+.hero{padding:56px 0 80px}
+.hero .wrap{
+  display:grid;
+  grid-template-columns:1fr clamp(300px,30vw,398px);
+  align-items:start;
+}
+.hero__main{padding-right:40px;min-width:0}
+
+.hero__kicker{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.155em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:0 0 32px;
+}
+
+.hero__title{
+  font-family:var(--serif);
+  color:var(--ink);
+  font-size:clamp(40px,6.2vw,90px);
+  line-height:1.13;
+  font-weight:350;
+  font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 1;
+  letter-spacing:-.015em;
+  margin:0;
+}
+.hero__amp{
+  font-style:italic;
+  color:var(--blue);
+  font-weight:350;
+  font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 1;
+}
+
+.hero__mark{
+  width:46px;
+  height:1px;
+  background:var(--faint);
+  margin:64px 0 0;
+  border:0;
+}
+
+/* right column sits lower, under a hairline */
+.hero__aside{padding-top:clamp(56px,8vw,117px);min-width:0}
+.hero__aside hr{border:0;height:1px;background:var(--faint);margin:0 0 30px}
+.hero__lede{
+  color:var(--blue);
+  font-size:17px;
+  line-height:1.72;
+  margin:0 0 30px;
+}
+.hero__sub{color:var(--muted);margin:0}
+
+/* ---------------------------------------------------------------
+   Generic section shell
+   --------------------------------------------------------------- */
+.section{padding:100px 0}
+.section--tint{background:var(--lav)}
+
+.section__head{
+  display:grid;
+  grid-template-columns:1fr 536px;
+  gap:0 0;
+  align-items:start;
+  margin-bottom:74px;
+}
+.section__intro{margin:0;padding-top:4px}
+.section__intro p{margin:0 0 18px}
+.section__intro p:last-child{margin-bottom:0}
+.section__note{color:var(--blue)}
+
+/* ---------------------------------------------------------------
+   Row lists (Research / Papers / Resources)
+   --------------------------------------------------------------- */
+.rows{border-top:1px solid var(--faint)}
+
+.row{
+  display:grid;
+  grid-template-columns:88px 269px 1fr;
+  padding:28px 0 30px;
+  border-bottom:1px solid var(--faint);
+}
+.rows--papers .row{grid-template-columns:88px 536px 1fr}
+
+.row--link{text-decoration:none;color:inherit;transition:background-color .18s ease}
+.row--link:hover{background:#fafaff}
+.row--link:hover .rowtitle{color:var(--blue)}
+
+.venue{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin:10px 0 0;
+}
+.authors{
+  font-family:var(--mono);
+  font-size:11px;
+  line-height:1.7;
+  color:var(--muted);
+  margin:18px 0 0;
+}
+
+/* status pip for datasets */
+.status{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin:10px 0 0;
+}
+.status::before{
+  content:"";
+  width:5px;height:5px;border-radius:50%;
+  background:currentColor;
+  flex:none;
+}
+.status--live{color:var(--teal)}
+.status--soon{color:var(--muted)}
+.status--soon::before{background:var(--faint)}
+
+/* ---------------------------------------------------------------
+   People
+   --------------------------------------------------------------- */
+.grouplabel{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin:0 0 16px;
+}
+.people-group{margin-bottom:48px}
+.people-group:last-child{margin-bottom:0}
+
+.people{
+  display:grid;
+  background:var(--lav-card);
+}
+.people--1{grid-template-columns:1fr}
+.people--2{grid-template-columns:repeat(2,1fr)}
+.people--3{grid-template-columns:repeat(3,1fr)}
+.people > * + *{border-left:1px solid var(--lav-rule)}
+
+.person{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:26px 28px;
+  text-decoration:none;
+  color:inherit;
+  transition:background-color .18s ease;
+}
+a.person:hover{background:#e5ebf8}
+a.person:hover .person__name{color:var(--blue)}
+
+.person__photo{
+  width:64px;height:64px;flex:none;
+  border-radius:50%;
+  object-fit:cover;
+  background:#dfe6f6;
+}
+/* fallback monogram if a photo file is missing */
+.person__photo--mono{
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);
+  font-size:22px;
+  color:#9aa6cc;
+  background:#dfe6f6;
+}
+.person__name{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:21px;
+  font-variation-settings:"opsz" 28,"SOFT" 0,"WONK" 0;
+  line-height:1.2;
+  color:var(--ink);
+  margin:0;
+}
+.person__role{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin:6px 0 0;
+}
+.person__affil{
+  font-size:14px;
+  color:var(--muted);
+  margin:3px 0 0;
+}
+
+/* ---------------------------------------------------------------
+   FAQ accordion
+   --------------------------------------------------------------- */
+.faq{border-top:1px solid var(--faint)}
+.faq details{border-bottom:1px solid var(--faint)}
+
+.faq summary{
+  display:grid;
+  grid-template-columns:88px 1fr 24px;
+  align-items:start;
+  padding:26px 0;
+  cursor:pointer;
+  list-style:none;
+}
+.faq summary::-webkit-details-marker{display:none}
+
+.faq summary .q{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:22px;
+  line-height:1.32;
+  color:var(--ink);
+  font-variation-settings:"opsz" 28,"SOFT" 0,"WONK" 0;
+  padding-right:32px;
+}
+.faq summary:hover .q{color:var(--blue)}
+
+.faq summary .sign{
+  font-family:var(--mono);
+  font-size:16px;
+  color:var(--faint);
+  text-align:right;
+  line-height:1.6;
+  transition:transform .2s ease,color .2s ease;
+}
+.faq details[open] summary .sign{transform:rotate(45deg);color:var(--blue)}
+
+.faq .answer{
+  display:grid;
+  grid-template-columns:88px 1fr;
+  padding:0 0 32px;
+}
+.faq .answer > div{grid-column:2;max-width:715px;padding-right:32px}
+.faq .answer p{margin:0 0 14px}
+.faq .answer > div > :last-child{margin-bottom:0}
+.faq .answer ul{margin:0 0 14px;padding-left:20px}
+.faq .answer li{margin:0 0 9px}
+.faq .answer li:last-child{margin-bottom:0}
+.faq .answer a{
+  color:var(--blue);
+  text-decoration:underline;
+  text-underline-offset:2px;
+  text-decoration-thickness:1px;
+  text-decoration-color:rgba(85,103,184,.4);
+}
+.faq .answer a:hover{text-decoration-color:var(--blue)}
+
+/* ---------------------------------------------------------------
+   Footer
+   --------------------------------------------------------------- */
+.foot{border-top:1px solid var(--faint);padding:36px 0 72px}
+.foot .wrap{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.foot__name{
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:17px;
+  color:var(--ink);
+  font-variation-settings:"opsz" 24,"SOFT" 0,"WONK" 0;
+  margin:0 0 8px;
+}
+.foot__line{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.04em;
+  color:var(--muted);
+  margin:0;
+}
+.foot__right{text-align:right}
+.foot__right a{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--blue);
+  text-decoration:none;
+}
+.foot__right a:hover{color:var(--ink)}
+.foot__copy{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--faint);
+  margin:14px 0 0;
+}
+
+/* ---------------------------------------------------------------
+   Responsive
+   --------------------------------------------------------------- */
+@media (max-width:980px){
+  .section__head{grid-template-columns:1fr;gap:26px 0}
+
+  /* title stacks above description before the whole row collapses */
+  .row,.rows--papers .row{grid-template-columns:88px 1fr;row-gap:12px}
+  .row > :nth-child(3){grid-column:2}
+  .people--3{grid-template-columns:repeat(2,1fr)}
+  .people--3 > :nth-child(3){border-left:0;border-top:1px solid var(--lav-rule)}
+}
+
+@media (max-width:720px){
+  :root{--gutter:28px}
+  .section{padding:84px 0}
+  .display{font-size:31px}
+  .masthead .wrap{flex-direction:column;align-items:flex-start;gap:16px}
+
+  .hero .wrap{grid-template-columns:1fr}
+  .hero__main{padding-right:0}
+  .hero__aside{padding-top:52px;max-width:520px}
+  .hero__mark{margin-top:44px}
+
+  .row,.rows--papers .row{grid-template-columns:1fr;gap:8px 0;padding:26px 0 28px}
+  .row > :nth-child(3){grid-column:auto}   /* undo the tablet 2-col placement */
+  .rownum{padding-top:0}
+  .rowtitle{padding-right:0}
+
+  /* comfortable tap targets + legible small labels on touch screens */
+  .nav{gap:4px 18px;margin:-10px 0}
+  .nav a{padding:12px 0}
+  .venue,.authors,.status,.person__role,.grouplabel,.eyebrow{font-size:12px}
+  .foot__line,.foot__right a{font-size:12px}
+
+  .people--2,.people--3{grid-template-columns:1fr}
+  .people > * + *{border-left:0;border-top:1px solid var(--lav-rule)}
+  .people--3 > :nth-child(3){border-left:0}
+
+  .faq summary{grid-template-columns:34px 1fr 20px;padding:22px 0}
+  .faq summary .q{padding-right:10px;font-size:19px}
+  .faq .answer{grid-template-columns:34px 1fr}
+  .faq .answer > div{padding-right:0}
+
+  .foot .wrap{flex-direction:column}
+  .foot__right{text-align:left}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================== HEADER =========================== -->
+<header class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="#top">CLS Lab</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#research">Research</a>
+      <a href="#papers">Papers</a>
+      <a href="#people">People</a>
+      <a href="#resources">Resources</a>
+      <a href="#join">Join Us</a>
+      <a class="is-accent" href="https://maria-antoniak.github.io">PI Site ↗</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero__main">
+      <p class="hero__kicker">University of Colorado Boulder</p>
+      <h1 class="hero__title">Culture,<br>Language, <span class="hero__amp">&amp;</span><br>Systems</h1>
+      <hr class="hero__mark">
+    </div>
+    <div class="hero__aside">
+      <hr>
+      <p class="hero__lede">We work at the boundaries of AI and the humanities, building and adapting computational methods as instruments for both measurement and interpretation.</p>
+      <p class="hero__sub">We study the language systems that transmit and shape modern culture, from internet platforms to literary archives to language models.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== RESEARCH ========================== -->
+<section class="section" id="research">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Research</p>
+        <h2 class="display">What we study</h2>
+      </div>
+      <p class="section__intro">We use <strong>natural language processing</strong> methods and models to illuminate questions humanists and social scientists have long cared about, and to bring humanistic nuance back to computational systems. We frequently collaborate with interdisciplinary teams across the humanities and social sciences.</p>
+    </div>
+
+    <div class="rows">
+      <div class="row">
+        <div class="rownum">01</div>
+        <h3 class="rowtitle">Pretraining Pipelines</h3>
+        <p class="rowbody">Probing the curation and processing pipelines that underlie large language models by examining what texts are included, how they are weighted and altered, and what cultural assumptions are embedded before training begins.</p>
+      </div>
+      <div class="row">
+        <div class="rownum">02</div>
+        <h3 class="rowtitle">Social Storytelling</h3>
+        <p class="rowbody">Studying how people narrate their lives in online communities by modeling latent story structures, social norms of storytelling, and how stories contribute to collective sense-making.</p>
+      </div>
+      <div class="row">
+        <div class="rownum">03</div>
+        <h3 class="rowtitle">Poetry as Data</h3>
+        <p class="rowbody">Using poetry as a probe for language models by measuring how their formal features (line breaks, spacing, shapes) are transformed in modern curation and modeling systems.</p>
+      </div>
+      <div class="row">
+        <div class="rownum">04</div>
+        <h3 class="rowtitle">Health Narratives</h3>
+        <p class="rowbody">Analyzing how patients and caregivers tell stories about illness, both in online communities and in increasingly AI-mediated electronic health records.</p>
+      </div>
+      <div class="row">
+        <div class="rownum">05</div>
+        <h3 class="rowtitle">Human–AI Writing</h3>
+        <p class="rowbody">Examining how people use language models for creative and personal goals, including the personal information they share and how co-authorship with AI reshapes the acts of editing and writing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== PAPERS =========================== -->
+<section class="section" id="papers">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Recent Papers</p>
+        <h2 class="display">Selected work</h2>
+      </div>
+    </div>
+
+    <div class="rows rows--papers">
+      <a class="row row--link" href="https://arxiv.org/abs/2606.19468">
+        <div class="rownum">01</div>
+        <div>
+          <h3 class="rowtitle">Characterizing Narrative Content in Web-scale LLM Pretraining Data</h3>
+          <p class="venue">arXiv 2026</p>
+        </div>
+        <div>
+          <p class="rowbody">Examines narrative structure within Dolma, a massive LLM pretraining corpus, using an 11-dimension framework. Finds that narrative qualities are unevenly distributed across data sources in ways current curation methods can't address.</p>
+          <p class="authors">Teagan Johnson, Elliott Ash, Andrew Piper, Maria Antoniak</p>
+        </div>
+      </a>
+
+      <a class="row row--link" href="https://aclanthology.org/2025.emnlp-main.1783/">
+        <div class="rownum">02</div>
+        <div>
+          <h3 class="rowtitle">so much depends / upon / a whitespace: Why Whitespace Matters for Poets and LLMs</h3>
+          <p class="venue">EMNLP 2025</p>
+        </div>
+        <div>
+          <p class="rowbody">Examines how whitespace functions as a meaningful artistic element in poetry, finding that LLMs largely fail to replicate the whitespace patterns seen in published poems, with implications for how pretraining data is linearized.</p>
+          <p class="authors">Sriharsh Bhyravajjula, Melanie Walsh, Anna Preus, Maria Antoniak</p>
+        </div>
+      </a>
+
+      <a class="row row--link" href="https://aclanthology.org/2025.acl-long.1272/">
+        <div class="rownum">03</div>
+        <div>
+          <h3 class="rowtitle">Research Borderlands: Analysing Writing Across Research Cultures</h3>
+          <p class="venue">ACL 2025</p>
+        </div>
+        <div>
+          <p class="rowbody">Studies cultural norms in academic writing across disciplines. Through both computational experiments and interviews with interdisciplinary researchers, shows how LLMs tend to homogenize writing rather than adapt to distinct research cultures.</p>
+          <p class="authors">Shaily Bhatt, Tal August, Maria Antoniak</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== PEOPLE =========================== -->
+<section class="section section--tint" id="people">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">People</p>
+        <h2 class="display">Our team</h2>
+      </div>
+      <p class="section__intro">We bring together researchers from computer science, linguistics, literary studies, and related fields, united by curiosity about language, computation, and culture.</p>
+    </div>
+
+    <!-- PHOTOS: currently hotlinked from the PI site. To self-host instead,
+         run the curl loop in README.md and swap each src to images/<name>.
+         If an image fails to load the circle falls back to a monogram. -->
+    <div class="people-group">
+      <p class="grouplabel">Principal Investigator</p>
+      <div class="people people--1">
+        <a class="person" href="https://maria-antoniak.github.io">
+          <img class="person__photo" src="https://maria-antoniak.github.io/resources/images/me_2025_small_cropped_square.png" alt="" width="128" height="128" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;div class=&quot;person__photo person__photo--mono&quot; aria-hidden=&quot;true&quot;&gt;MA&lt;/div&gt;'">
+          <div>
+            <p class="person__name">Maria Antoniak</p>
+            <p class="person__role">Principal Investigator</p>
+            <p class="person__affil">Assistant Professor, CU Boulder</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="people-group">
+      <p class="grouplabel">PhD Students</p>
+      <div class="people people--3">
+        <a class="person" href="https://johnsont4.github.io/">
+          <img class="person__photo" src="https://maria-antoniak.github.io/resources/images/teagan_cropped.jpg" alt="" width="128" height="128" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;div class=&quot;person__photo person__photo--mono&quot; aria-hidden=&quot;true&quot;&gt;TJ&lt;/div&gt;'">
+          <div>
+            <p class="person__name">Teagan Johnson</p>
+            <p class="person__role">PhD Student</p>
+          </div>
+        </a>
+        <a class="person" href="https://advaitdeshmukh.com/">
+          <img class="person__photo" src="https://maria-antoniak.github.io/resources/images/advait.jpeg" alt="" width="128" height="128" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;div class=&quot;person__photo person__photo--mono&quot; aria-hidden=&quot;true&quot;&gt;AD&lt;/div&gt;'">
+          <div>
+            <p class="person__name">Advait Deshmukh</p>
+            <p class="person__role">PhD Student</p>
+          </div>
+        </a>
+        <a class="person" href="https://dhasmanaakriti.github.io/">
+          <img class="person__photo" src="https://maria-antoniak.github.io/resources/images/akriti.jpg" alt="" width="128" height="128" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;div class=&quot;person__photo person__photo--mono&quot; aria-hidden=&quot;true&quot;&gt;AD&lt;/div&gt;'">
+          <div>
+            <p class="person__name">Akriti Dhasmana</p>
+            <p class="person__role">PhD Student</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="people-group">
+      <p class="grouplabel">Affiliated Researchers</p>
+      <div class="people people--2">
+        <a class="person" href="https://darthbhyrava.com/">
+          <img class="person__photo" src="https://maria-antoniak.github.io/resources/images/harsh_stavanger.jpeg" alt="" width="128" height="128" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;div class=&quot;person__photo person__photo--mono&quot; aria-hidden=&quot;true&quot;&gt;SB&lt;/div&gt;'">
+          <div>
+            <p class="person__name">Sriharsh Bhyravajjula</p>
+            <p class="person__role">Affiliated Researcher</p>
+          </div>
+        </a>
+        <a class="person" href="https://umagunturi.github.io/">
+          <img class="person__photo" src="https://maria-antoniak.github.io/resources/images/uma.png" alt="" width="128" height="128" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;div class=&quot;person__photo person__photo--mono&quot; aria-hidden=&quot;true&quot;&gt;UG&lt;/div&gt;'">
+          <div>
+            <p class="person__name">Uma Gunturi</p>
+            <p class="person__role">Affiliated Researcher</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= RESOURCES ========================== -->
+<section class="section" id="resources">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Resources</p>
+        <h2 class="display">Datasets &amp; Tools</h2>
+      </div>
+    </div>
+
+    <div class="rows">
+      <div class="row">
+        <div class="rownum">01</div>
+        <div>
+          <h3 class="rowtitle">WildStories</h3>
+          <p class="status status--soon">Coming soon</p>
+        </div>
+        <p class="rowbody">A large-scale dataset of naturally occurring narratives collected from online communities.</p>
+      </div>
+      <div class="row">
+        <div class="rownum">02</div>
+        <div>
+          <h3 class="rowtitle">WildEdits</h3>
+          <p class="status status--soon">Coming soon</p>
+        </div>
+        <p class="rowbody">A dataset of human editing behavior in collaborative and AI-assisted writing contexts.</p>
+      </div>
+      <a class="row row--link" href="https://arxiv.org/abs/2606.19468">
+        <div class="rownum">03</div>
+        <div>
+          <h3 class="rowtitle">NarraBERT</h3>
+          <p class="status status--live">Available</p>
+        </div>
+        <p class="rowbody">A model for detecting and classifying narrative content across web-scale text corpora.</p>
+      </a>
+      <a class="row row--link" href="https://arxiv.org/abs/2606.19468">
+        <div class="rownum">04</div>
+        <div>
+          <h3 class="rowtitle">NarraDolma</h3>
+          <p class="status status--live">Available</p>
+        </div>
+        <p class="rowbody">Narrative annotations over the Dolma pretraining corpus, enabling large-scale analysis of story structure in LLM training data.</p>
+      </a>
+      <a class="row row--link" href="https://aclanthology.org/2023.acl-demo.36/">
+        <div class="rownum">05</div>
+        <div>
+          <h3 class="rowtitle">Riveter</h3>
+          <p class="status status--live">Available</p>
+        </div>
+        <p class="rowbody">A Python package for measuring semantic properties of entities — power, agency, and sentiment — across text corpora.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== JOIN US ========================== -->
+<section class="section" id="join">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Join Us</p>
+        <h2 class="display">Interested in joining<br>the lab?</h2>
+      </div>
+      <div class="section__intro">
+        <p>We are actively recruiting 1–2 PhD students in Computer Science and Information Science for Fall 2027. This year, we especially welcome applicants with interests in <strong>healthcare</strong> and <strong>literary studies</strong>, but other applicants are welcome as well.</p>
+        <p class="section__note">Applying for a PhD position with us? There's no need to email — apply directly through the Computer Science or Information Science department.</p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary><span class="rownum">01</span><span class="q">Are you recruiting PhD students?</span><span class="sign">+</span></summary>
+        <div class="answer"><div>
+            <p>Yes, I am recruiting 1–2 PhD students in Computer Science at CU Boulder to start in Fall 2027.</p>
+          </div></div>
+      </details>
+      <details>
+        <summary><span class="rownum">02</span><span class="q">What are you looking for in PhD students?</span><span class="sign">+</span></summary>
+        <div class="answer"><div>
+            <p>I'm looking for students with experience in (1) natural language processing, (2) software engineering or data science, and (3) academic research. My work is interdisciplinary, and I appreciate when students have experience in areas outside of computer science. I also value time spent in industry and/or pursuing other interests outside of academia. Students with non-traditional backgrounds are very welcome to apply.</p>
+            <p>This year, I'm particularly interested in students with interests in healthcare and/or literary studies, but I welcome applications from other students as well.</p>
+          </div></div>
+      </details>
+      <details>
+        <summary><span class="rownum">03</span><span class="q">How can I apply to do a PhD with you?</span><span class="sign">+</span></summary>
+        <div class="answer"><div>
+            <p>You need to apply to the CS PhD program at CU Boulder and list me as a potential advisor in the application form. I can also advise and co-advise students in Information Science.</p>
+            <p>There is no need to email me. I'm sorry, but due to the volume of messages, I will probably not be able to reply to any messages about PhD admissions. I appreciate your interest very much — but for context, I receive at least one request like this per day, and it is simply impossible to respond to, let alone meet with, everyone who reaches out to me.</p>
+            <p>If application fees are a burden, check out CU Boulder's <a href="https://www.colorado.edu/cs/admissions/graduate-admissions">various fee waiver programs</a>. Unfortunately I can't provide feedback on your application ahead of time or provide any guarantees about admission.</p>
+            <p>Some resources:</p>
+            <ul>
+              <li><a href="https://www.colorado.edu/cs/admissions/graduate-admissions">CU Boulder's CS graduate admissions homepage</a>, including information about fee waivers</li>
+              <li><a href="https://www.colorado.edu/cs/admissions/graduate-admissions/how-apply">Tips for creating an impactful application</a> and opportunities for an application fee waiver</li>
+              <li><a href="https://grad.apply.colorado.edu/portal/cs-info">Virtual information sessions</a> for the CU Boulder CS graduate programs</li>
+            </ul>
+          </div></div>
+      </details>
+      <details>
+        <summary><span class="rownum">04</span><span class="q">Do you have advice about PhD applications?</span><span class="sign">+</span></summary>
+        <div class="answer"><div>
+            <p>Check out my <a href="https://maria-antoniak.github.io/2020/11/27/phd-applications.html">blog post</a> on this topic. I've tried to make this a comprehensive guide to the PhD application process and what it's like to study at Cornell Information Science (which is where I did my PhD). You might also like to consult <a href="https://github.com/shaily99/advice">this huge list of resources</a>.</p>
+          </div></div>
+      </details>
+      <details>
+        <summary><span class="rownum">05</span><span class="q">I'm an undergrad or master's student, can I do research with you?</span><span class="sign">+</span></summary>
+        <div class="answer"><div>
+            <p>I don't currently have any paid RA positions for undergrad or master's students. If you're still interested, you can send me an email, but due to the volume of requests, I might not be able to respond.</p>
+          </div></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== FOOTER =========================== -->
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <p class="foot__name">CLS Lab</p>
+      <p class="foot__line">Culture, Language &amp; Systems — University of Colorado Boulder</p>
+    </div>
+    <div class="foot__right">
+      <a href="https://maria-antoniak.github.io">PI Site ↗</a>
+      <p class="foot__copy">© 2026 CLS Lab</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
