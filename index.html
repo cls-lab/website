@@ -223,7 +223,14 @@ a:focus-visible,summary:focus-visible{
 .section__intro{grid-column:var(--split) / -1;margin:0;padding-top:4px}
 .section__intro p{margin:0 0 18px}
 .section__intro p:last-child{margin-bottom:0}
-.section__note{color:var(--blue)}
+/* callout for the one thing applicants must not miss */
+.section__note{
+  color:var(--blue);
+  background:var(--lav);
+  border-left:3px solid var(--blue);
+  padding:16px 20px;
+  margin-top:24px;
+}
 
 /* ---------------------------------------------------------------
    Row lists (Research / Papers / Resources)
@@ -646,7 +653,6 @@ a.person:hover .person__name{color:var(--blue)}
         <div>
           <p class="person__name">Maria Antoniak</p>
           <p class="person__role">Principal Investigator</p>
-          <p class="person__affil">Assistant Professor, CU Boulder</p>
         </div>
       </a>
       <a class="person" href="https://johnsont4.github.io/">
@@ -753,7 +759,7 @@ a.person:hover .person__name{color:var(--blue)}
       </div>
       <div class="section__intro">
         <p>We are actively recruiting 1–2 PhD students in Computer Science and Information Science for Fall 2027. This year, we especially welcome applicants with interests in <strong>healthcare</strong> and <strong>literary studies</strong>, but other applicants are welcome as well.</p>
-        <p class="section__note">Applying for a PhD position with us? There's no need to email — apply directly through the Computer Science or Information Science department.</p>
+        <p class="section__note">Applying for a PhD position with us? There's no need to email! Instead, apply directly through the Computer Science or Information Science department.</p>
       </div>
     </div>
 
