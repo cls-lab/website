@@ -38,7 +38,7 @@
 
   /* One 12-column grid shared by every section. The page splits at
      column 7 everywhere: hero title | lede, section heading | intro,
-     row number + title | description. Change the split in one place
+     row title | description. Change the split in one place
      via --split (a column line number, 2..12). */
   --colgap: 32px;
   --split: 7;
@@ -96,15 +96,6 @@ a:focus-visible,summary:focus-visible{
   letter-spacing:-.01em;
   font-variation-settings:"opsz" 72,"SOFT" 0,"WONK" 1;
   margin:0;
-}
-
-.rownum{
-  font-family:var(--mono);
-  font-size:12px;
-  font-weight:500;
-  letter-spacing:.08em;
-  color:var(--muted);
-  padding-top:7px;
 }
 
 .rowtitle{
@@ -234,7 +225,7 @@ a:focus-visible,summary:focus-visible{
 
 /* ---------------------------------------------------------------
    Row lists (Research / Papers / Resources)
-   Number | title | description, on the same split as the headings.
+   Title | description, on the same split as the headings.
    --------------------------------------------------------------- */
 .rows{border-top:1px solid var(--rule)}
 
@@ -242,9 +233,8 @@ a:focus-visible,summary:focus-visible{
   padding:28px 0 30px;
   border-bottom:1px solid var(--rule);
 }
-.row > :nth-child(1){grid-column:1 / 2}
-.row > :nth-child(2){grid-column:2 / var(--split);min-width:0}
-.row > :nth-child(3){grid-column:var(--split) / -1;min-width:0}
+.row > :nth-child(1){grid-column:1 / var(--split);min-width:0}
+.row > :nth-child(2){grid-column:var(--split) / -1;min-width:0}
 
 .row--link{text-decoration:none;color:inherit;transition:background-color .18s ease}
 .row--link:hover{background:#fafaff}
@@ -345,7 +335,7 @@ a.person:hover .person__name{color:var(--blue)}
 }
 
 /* ---------------------------------------------------------------
-   FAQ accordion (same number column as the row lists)
+   FAQ accordion
    --------------------------------------------------------------- */
 .faq{border-top:1px solid var(--rule)}
 .faq details{border-bottom:1px solid var(--rule)}
@@ -357,8 +347,7 @@ a.person:hover .person__name{color:var(--blue)}
   list-style:none;
 }
 .faq summary::-webkit-details-marker{display:none}
-.faq summary .rownum{grid-column:1 / 2}
-.faq summary .q{grid-column:2 / 12;min-width:0}
+.faq summary .q{grid-column:1 / 12;min-width:0}
 .faq summary .sign{grid-column:12 / 13}
 
 .faq summary .q{
@@ -382,7 +371,7 @@ a.person:hover .person__name{color:var(--blue)}
 .faq details[open] summary .sign{transform:rotate(45deg);color:var(--blue)}
 
 .faq .answer{padding:0 0 32px}
-.faq .answer > div{grid-column:2 / 11;min-width:0}
+.faq .answer > div{grid-column:1 / 11;min-width:0}
 .faq .answer p{margin:0 0 14px}
 .faq .answer > div > :last-child{margin-bottom:0}
 .faq .answer ul{margin:0 0 14px;padding-left:20px}
@@ -445,7 +434,7 @@ a.person:hover .person__name{color:var(--blue)}
 
   /* title stacks above description before the whole row collapses */
   .row{row-gap:12px}
-  .row > :nth-child(2),.row > :nth-child(3){grid-column:2 / -1}
+  .row > :nth-child(1),.row > :nth-child(2){grid-column:1 / -1}
 
   .people{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
@@ -463,10 +452,7 @@ a.person:hover .person__name{color:var(--blue)}
   .hero__main,.hero__aside{grid-column:1 / -1}
   .hero__aside{padding-top:52px;max-width:520px}
 
-  /* number stays in its own narrow column; title and text share the rest */
   .row{row-gap:8px;padding:26px 0 28px}
-  .row > :nth-child(1){grid-column:1 / 2}
-  .row > :nth-child(2),.row > :nth-child(3){grid-column:2 / -1}
 
   /* comfortable tap targets on touch screens */
   .nav{gap:4px 18px;margin:-10px 0}
@@ -474,10 +460,10 @@ a.person:hover .person__name{color:var(--blue)}
 
   .people{grid-template-columns:1fr;gap:12px}
 
-  .faq summary,.faq .answer{grid-template-columns:34px minmax(0,1fr) 20px;column-gap:0}
-  .faq summary .rownum,.faq summary .q,.faq summary .sign{grid-column:auto}
+  .faq summary,.faq .answer{grid-template-columns:minmax(0,1fr) 20px;column-gap:0}
+  .faq summary .q,.faq summary .sign{grid-column:auto}
   .faq summary .q{padding-right:10px;font-size:19px}
-  .faq .answer > div{grid-column:2 / 3}
+  .faq .answer > div{grid-column:1 / 2}
 
   .foot .wrap{flex-direction:column}
   .foot__right{text-align:left}
@@ -555,27 +541,22 @@ a.person:hover .person__name{color:var(--blue)}
 
     <div class="rows">
       <div class="row grid">
-        <div class="rownum">01</div>
         <h3 class="rowtitle">Pretraining Pipelines</h3>
         <p class="rowbody">Probing the curation and processing pipelines that underlie large language models by examining what texts are included, how they are weighted and altered, and what cultural assumptions are embedded before training begins.</p>
       </div>
       <div class="row grid">
-        <div class="rownum">02</div>
         <h3 class="rowtitle">Social Storytelling</h3>
         <p class="rowbody">Studying how people narrate their lives in online communities by modeling latent story structures, social norms of storytelling, and how stories contribute to collective sense-making.</p>
       </div>
       <div class="row grid">
-        <div class="rownum">03</div>
         <h3 class="rowtitle">Poetry as Data</h3>
         <p class="rowbody">Using poetry as a probe for language models by measuring how their formal features (line breaks, spacing, shapes) are transformed in modern curation and modeling systems.</p>
       </div>
       <div class="row grid">
-        <div class="rownum">04</div>
         <h3 class="rowtitle">Health Narratives</h3>
         <p class="rowbody">Analyzing how patients and caregivers tell stories about illness, both in online communities and in increasingly AI-mediated electronic health records.</p>
       </div>
       <div class="row grid">
-        <div class="rownum">05</div>
         <h3 class="rowtitle">Human–AI Writing</h3>
         <p class="rowbody">Examining how people use language models for creative and personal goals, including the personal information they share and how co-authorship with AI reshapes the acts of editing and writing.</p>
       </div>
@@ -594,8 +575,18 @@ a.person:hover .person__name{color:var(--blue)}
     </div>
 
     <div class="rows rows--papers">
+      <a class="row row--link grid" href="https://arxiv.org/abs/2609.14677">
+        <div>
+          <h3 class="rowtitle">The Garden of Forking Prompts: How Users Explore Narrative Space in Story Generation</h3>
+          <p class="venue">COLM 2026</p>
+        </div>
+        <div>
+          <p class="rowbody">Studies how people revise story prompts in real chatbot logs, introducing WildStories (275K story prompts) and WildEdits (24K edit trees). Develops a framework of edit types to map how users explore narrative possibilities and shows how it can benchmark story generation.</p>
+          <p class="authors">Advait Deshmukh, Nora Benedict, Melanie Walsh, Maria Antoniak</p>
+        </div>
+      </a>
+
       <a class="row row--link grid" href="https://arxiv.org/abs/2606.19468">
-        <div class="rownum">01</div>
         <div>
           <h3 class="rowtitle">Characterizing Narrative Content in Web-scale LLM Pretraining Data</h3>
           <p class="venue">arXiv 2026</p>
@@ -607,7 +598,6 @@ a.person:hover .person__name{color:var(--blue)}
       </a>
 
       <a class="row row--link grid" href="https://aclanthology.org/2025.emnlp-main.1783/">
-        <div class="rownum">02</div>
         <div>
           <h3 class="rowtitle">so much depends / upon / a whitespace: Why Whitespace Matters for Poets and LLMs</h3>
           <p class="venue">EMNLP 2025</p>
@@ -619,7 +609,6 @@ a.person:hover .person__name{color:var(--blue)}
       </a>
 
       <a class="row row--link grid" href="https://aclanthology.org/2025.acl-long.1272/">
-        <div class="rownum">03</div>
         <div>
           <h3 class="rowtitle">Research Borderlands: Analysing Writing Across Research Cultures</h3>
           <p class="venue">ACL 2025</p>
@@ -705,24 +694,21 @@ a.person:hover .person__name{color:var(--blue)}
     </div>
 
     <div class="rows">
-      <div class="row grid">
-        <div class="rownum">01</div>
+      <a class="row row--link grid" href="https://github.com/advaitdeshmukh/The-Garden-of-Forking-Prompts">
         <div>
           <h3 class="rowtitle">WildStories</h3>
-          <p class="status status--soon">Coming soon</p>
+          <p class="status status--live">Available</p>
         </div>
         <p class="rowbody">A large-scale dataset of naturally occurring narratives collected from online communities.</p>
-      </div>
-      <div class="row grid">
-        <div class="rownum">02</div>
+      </a>
+      <a class="row row--link grid" href="https://github.com/advaitdeshmukh/The-Garden-of-Forking-Prompts">
         <div>
           <h3 class="rowtitle">WildEdits</h3>
-          <p class="status status--soon">Coming soon</p>
+          <p class="status status--live">Available</p>
         </div>
         <p class="rowbody">A dataset of human editing behavior in collaborative and AI-assisted writing contexts.</p>
-      </div>
+      </a>
       <a class="row row--link grid" href="https://arxiv.org/abs/2606.19468">
-        <div class="rownum">03</div>
         <div>
           <h3 class="rowtitle">NarraBERT</h3>
           <p class="status status--live">Available</p>
@@ -730,7 +716,6 @@ a.person:hover .person__name{color:var(--blue)}
         <p class="rowbody">A model for detecting and classifying narrative content across web-scale text corpora.</p>
       </a>
       <a class="row row--link grid" href="https://arxiv.org/abs/2606.19468">
-        <div class="rownum">04</div>
         <div>
           <h3 class="rowtitle">NarraDolma</h3>
           <p class="status status--live">Available</p>
@@ -738,7 +723,6 @@ a.person:hover .person__name{color:var(--blue)}
         <p class="rowbody">Narrative annotations over the Dolma pretraining corpus, enabling large-scale analysis of story structure in LLM training data.</p>
       </a>
       <a class="row row--link grid" href="https://aclanthology.org/2023.acl-demo.36/">
-        <div class="rownum">05</div>
         <div>
           <h3 class="rowtitle">Riveter</h3>
           <p class="status status--live">Available</p>
@@ -765,20 +749,20 @@ a.person:hover .person__name{color:var(--blue)}
 
     <div class="faq">
       <details>
-        <summary class="grid"><span class="rownum">01</span><span class="q">Are you recruiting PhD students?</span><span class="sign">+</span></summary>
+        <summary class="grid"><span class="q">Are you recruiting PhD students?</span><span class="sign">+</span></summary>
         <div class="answer grid"><div>
             <p>Yes, we are recruiting 1–2 PhD students in Computer Science or Information Science at CU Boulder to start in Fall 2027.</p>
           </div></div>
       </details>
       <details>
-        <summary class="grid"><span class="rownum">02</span><span class="q">What are you looking for in PhD students?</span><span class="sign">+</span></summary>
+        <summary class="grid"><span class="q">What are you looking for in PhD students?</span><span class="sign">+</span></summary>
         <div class="answer grid"><div>
             <p>We're looking for students with experience in (1) natural language processing, (2) software engineering or data science, and (3) academic research. Our work is interdisciplinary, and we appreciate when students have experience in areas outside of computer science. We also value time spent in industry and/or pursuing other interests outside of academia. Students with non-traditional backgrounds are very welcome to apply.</p>
             <p>This year, we're particularly looking for students with interests in healthcare and/or literary studies, but we welcome applications from other students as well.</p>
           </div></div>
       </details>
       <details>
-        <summary class="grid"><span class="rownum">03</span><span class="q">How can I apply to do a PhD with the CLS Lab? Should I email you?</span><span class="sign">+</span></summary>
+        <summary class="grid"><span class="q">How can I apply to do a PhD with the CLS Lab? Should I email you?</span><span class="sign">+</span></summary>
         <div class="answer grid"><div>
             <p>You need to apply to the CS PhD program at CU Boulder and list Maria Antoniak as a potential advisor in the application form. Maria can also advise and co-advise students in Information Science.</p>
             <p><b>Please do not send emails about PhD admissions to Maria Antoniak.</b> Due to the volume of messages, I will not be able to reply to any messages about PhD admissions. I appreciate your interest very much — but for context, I receive multiple requests like this per day, and it is simply impossible to respond to, let alone meet with, everyone who reaches out to me.</p>
@@ -793,13 +777,13 @@ a.person:hover .person__name{color:var(--blue)}
           </div></div>
       </details>
       <details>
-        <summary class="grid"><span class="rownum">04</span><span class="q">Do you have advice about PhD applications?</span><span class="sign">+</span></summary>
+        <summary class="grid"><span class="q">Do you have advice about PhD applications?</span><span class="sign">+</span></summary>
         <div class="answer grid"><div>
             <p>Check out my <a href="https://maria-antoniak.github.io/2020/11/27/phd-applications.html">blog post</a> on this topic. I've tried to make this a comprehensive guide to the PhD application process and what it's like to study at Cornell Information Science (which is where I did my PhD). You might also like to consult <a href="https://github.com/shaily99/advice">this huge list of resources</a>.</p>
           </div></div>
       </details>
       <details>
-        <summary class="grid"><span class="rownum">05</span><span class="q">I'm an undergrad or master's student, can I do research with you?</span><span class="sign">+</span></summary>
+        <summary class="grid"><span class="q">I'm an undergrad or master's student, can I do research with you?</span><span class="sign">+</span></summary>
         <div class="answer grid"><div>
             <p>We don't currently have any paid RA positions for undergrad or master's students. If you're still interested, you can send Maria Antoniak an email, but due to the volume of requests, we might not be able to respond.</p>
           </div></div>
